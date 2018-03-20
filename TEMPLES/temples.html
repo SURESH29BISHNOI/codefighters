@@ -1,0 +1,411 @@
+<!doctype html>
+<html>
+   <body>
+    <style>@import "compass/css3";
+
+$body-bg: #c1bdba;
+$form-bg: #13232f;
+$white: #ffffff;
+
+$main: #1ab188;
+$main-light: lighten($main,5%);
+$main-dark: darken($main,5%);
+
+$gray-light: #a0b3b0;
+$gray: #ddd;
+
+$thin: 300;
+$normal: 400;
+$bold: 600;
+$br: 4px;
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll; 
+}
+
+body {
+  background:$body-bg;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+a {
+  text-decoration:none;
+  color:$main;
+  transition:.5s ease;
+  &:hover {
+    color:$main-dark;
+  }
+}
+
+.form {
+  background:rgba($form-bg,.9);
+  padding: 40px;
+  max-width:600px;
+  margin:40px auto;
+  border-radius:$br;
+  box-shadow:0 4px 10px 4px rgba($form-bg,.3);
+}
+
+.tab-group {
+  list-style:none;
+  padding:0;
+  margin:0 0 40px 0;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  li a {
+    display:block;
+    text-decoration:none;
+    padding:15px;
+    background:rgba($gray-light,.25);
+    color:$gray-light;
+    font-size:20px;
+    float:left;
+    width:50%;
+    text-align:center;
+    cursor:pointer;
+    transition:.5s ease;
+    &:hover {
+      background:$main-dark;
+      color:$white;
+    }
+  }
+  .active a {
+    background:$main;
+    color:$white;
+  }
+}
+
+.tab-content > div:last-child {
+  display:none;
+}
+
+
+h1 {
+  text-align:center;
+  color:$white;
+  font-weight:$thin;
+  margin:0 0 40px;
+}
+
+label {
+  position:absolute;
+  transform:translateY(6px);
+  left:13px;
+  color:rgba($white,.5);
+  transition:all 0.25s ease;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  font-size:22px;
+  .req {
+    margin:2px;
+    color:$main;
+  }
+}
+
+label.active {
+  transform:translateY(50px);
+  left:2px;
+  font-size:14px;
+  .req {
+    opacity:0;
+  }
+}
+
+label.highlight {
+  color:$white;
+}
+
+input, textarea {
+  font-size:22px;
+  display:block;
+  width:100%;
+  height:100%;
+  padding:5px 10px;
+  background:none;
+  background-image:none;
+  border:1px solid $gray-light;
+  color:$white;
+  border-radius:0;
+  transition:border-color .25s ease, box-shadow .25s ease;
+  &:focus {
+    outline:0;
+    border-color:$main;
+  }
+}
+
+textarea {
+  border:2px solid $gray-light;
+  resize: vertical;
+}
+
+.field-wrap {
+  position:relative;
+  margin-bottom:40px;
+}
+
+.top-row {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  > div {
+    float:left;
+    width:48%;
+    margin-right:4%;
+    &:last-child { 
+      margin:0;
+    }
+  }
+}
+
+.button {
+  border:0;
+  outline:none;
+  border-radius:0;
+  padding:15px 0;
+  font-size:2rem;
+  font-weight:$bold;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  background:$main;
+  color:$white;
+  transition:all.5s ease;
+  -webkit-appearance: none;
+  &:hover, &:focus {
+    background:$main-dark;
+  }
+}
+
+.button-block {
+  display:block;
+  width:100%;
+}
+
+.forgot {
+  margin-top:-20px;
+  text-align:right;
+}</style>
+<script>
+$('.form').find('input, textarea').on('keyup blur focus', function (e) {
+  
+  var $this = $(this),
+      label = $this.prev('label');
+
+    if (e.type === 'keyup') {
+      if ($this.val() === '') {
+          label.removeClass('active highlight');
+        } else {
+          label.addClass('active highlight');
+        }
+    } else if (e.type === 'blur') {
+      if( $this.val() === '' ) {
+        label.removeClass('active highlight'); 
+      } else {
+        label.removeClass('highlight');   
+      }   
+    } else if (e.type === 'focus') {
+      
+      if( $this.val() === '' ) {
+        label.removeClass('highlight'); 
+      } 
+      else if( $this.val() !== '' ) {
+        label.addClass('highlight');
+      }
+    }
+
+});
+
+$('.tab a').on('click', function (e) {
+  
+  e.preventDefault();
+  
+  $(this).parent().addClass('active');
+  $(this).parent().siblings().removeClass('active');
+  
+  target = $(this).attr('href');
+
+  $('.tab-content > div').not(target).hide();
+  
+  $(target).fadeIn(600);
+  
+});</script>
+       <head >
+
+           <title>JOURNEY TO INDIA  </title>
+           <meta charset = "utf-8" />
+
+       </head>
+
+          
+                        
+
+                  	    <div class="form">
+      
+      <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div id="signup">   
+          <h1>Sign Up for Free</h1>
+          
+          <form action="/" method="post">
+          
+          <div class="top-row">
+            <div class="field-wrap">
+              <label>
+                First Name<span class="req">*</span>
+              </label>
+              <input type="text" required autocomplete="off" />
+            </div>
+        
+            <div class="field-wrap">
+              <label>
+                Last Name<span class="req">*</span>
+              </label>
+              <input type="text"required autocomplete="off"/>
+            </div>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email"required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Set A Password<span class="req">*</span>
+            </label>
+            <input type="password"required autocomplete="off"/>
+          </div>
+          
+          <button type="submit" class="button button-block"/>Get Started</button>
+          
+          </form>
+
+        </div>
+        
+        <div id="login">   
+          <h1>Welcome Back!</h1>
+          
+          <form action="/" method="post">
+          
+            <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email"required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password"required autocomplete="off"/>
+          </div>
+          
+          <p class="forgot"><a href="#">Forgot Password?</a></p>
+          
+          <button class="button button-block"/>Log In</button>
+          
+          </form>
+
+        </div>
+        
+      </div><!-- tab-content -->
+      
+</div> <!-- /form -->
+                        
+                        <div class = "container"> 
+                         
+                         <div class = "text-block">
+                          <h1>12 Most Visited Religious Places Across Indiav</h1>
+                         
+                         <h4>1. 
+                         Mehrangarh Fort: Jodhpur</h4> 
+                         <img src = "C:\Users\AMAN\Desktop\hackerthon\forts\a.jpg" alt = "example image" height ="500"  width = "1500" >  
+                         <p>When in doubt, go Goa!  One cannot really go wrong with India’s party capital. A place where people can be seen sunbathing, swimming, parasailing or relaxing in their hammocks sipping a cold beer all year round, Goa is my first pick. In fact, Goa is the best place to kick-start your beach blast in advance with Sunburn Goa this December! Sunburn is when a conglomerate of party mongers and DJs from all over the world get together at the Candolim beach for the grandest New Year beach party. Late night parties, hypnotic music and people dancing away; Sunburn exponentially increases the fun quotient. </p>
+
+
+                         <h4>2.Red Fort: Delhi</h4> 
+                         <img src = "C:\Users\AMAN\Desktop\hackerthon\forts\b.jpg" alt = "example image" height ="500"  width = "1500" >  
+                         <p>Lal Quila or The Red Fort is the most important historical buildings in India,located at Delhi. The most famous monuments in Delhi built by the Mughal Emperor Shah Jahan. Due to the thick red sandstone walls this largest monuments called as red fort. Important buildings and other structures inside the forts are A mosque known as Moti Masjid,Diwan-i-Aam etc. The fort lies along the “holy river of India” Yamuna River. There is an archaeological museum and an Indian war memorial museum within the fort. It is most powerful symbol of India’s sovereignty,The Prime Minister of India addresses the nation and raises the flag of India on Independence and Republic Day of India. </p>
+
+
+
+                         <h4>3. 
+                         Gwalior Fort: Gwalior</h4> 
+                         <img src = "C:\Users\AMAN\Desktop\hackerthon\forts\c.jpg" alt = "example image" height ="500"  width = "1500" >  
+                         <p>Gwalior Fort the beautiful historical monument located in Madhya Pradesh built by Rana Man Singh Tomar. This magnificent monument holds a specimen of the wonderful ancient Indian architecture. The major attraction of Gwalior fort are famous Sas-Bahu temple,Gujari Mahal which is now a museum and The Man Mandir. The majestic monument is one of the biggest forts in India and a postage stamp has been issued to remember the importance of this fort. Madhya Pradesh the Heartland of India ranks among the most popular tourist attractions in India for its wonderful ancient Indian architecture. </p>
+
+
+                         <h4>4. 
+                        Golconda Fort: Hyderabad</h4> 
+                         <img src = "C:\Users\AMAN\Desktop\hackerthon\forts\d.jpg" alt = "example image" height ="500"  width = "1500" >  
+                         <p>The famous Golconda fort located at Hyderabad, Andhra Pradesh, built by Kakatiya kings. The heritage monument is known for its rich history and a majestic and imposing grand structure. Golkonda was once renowned for the Magnificent diamonds found on the south-east at Kollur Mine near Kollur lake. The awesome Golconda Fort is famous for its military architecture and One of the most wonderful monuments in India. Golconda Fort is counted as Seven Wonders of Hyderabad, others are Charminar,Birla Mandir,Ramoji Film City, Hussain sagar, salarjung museum and Mecca Masjid the Biggest mosque in Hyderabad. </p>
+
+
+                         <h4>5. 
+                        Jaisalmer Fort: Jaisalmer</h4> 
+                         <img src = "C:\Users\AMAN\Desktop\hackerthon\forts\e.jpg" alt = "example image" height ="500"  width = "1500" >  
+                         <p>Jaisalmer fort,one of the largest forts in the world,situated in the state of Rajasthan,built by Rawal Jaisal. The magnificent foundation of Jaisalmer Fort is situated in the midst of the sandy terrain of the Great Thar Desert. Jaisalmer fort is also known as Sonar quila and “Golden Fort, built on the triangular shaped Trikuta hill, 76 m above the town. The second oldest fort in the state of Rajasthan counted as one of the most invincible forts in India. Major attractions inside the forts are Jain temples,Royal palace and big gates. Jaisalmer is the land of sand also famous for it Trikuta Hill,Havelis, palace and Lakes. </p>
+
+
+                          <h4>6. 
+                        Agra Fort: Agra</h4> 
+                         <img src = "C:\Users\AMAN\Desktop\hackerthon\forts\f.jpg" alt = "example image" height ="500"  width = "1500" >  
+                         <p>It is the most important fort in India situated in AgraUttar Pradesh,about 2Km form its more famous sister monument, “The Taj Mahal”. Sikandar Lodi was the first Sultan of Delhi who shifted to Agra and lived in the fort. The a UNESCO World Heritage site is lies on the right bank of the river Yamuna. Agra Fort also known as the red fort of Agra is among the best tourist places in Uttar Pradesh. Jhansi fort another marvelous architecture of forts in India.The fort was a residence of Rani Laxmibai of Jhansi located in Uttar Pradesh </p>
+
+
+                          <h4>7. 
+                        Kangra Fort: Kangra</h4> 
+                         <img src = "C:\Users\AMAN\Desktop\hackerthon\forts\g.jpg" alt = "example image" heigt ="500"  width = "1500" >  
+                         <p>The famous Kangra fort built by the Royal family of Kangra, situated on the confluence of the Banganga and Manjhi Rivers in the Kangra valley of Himachal Pradesh. The famous monumental fort is count amongst the oldest forts in the world. It is the largest fort in the Himalayas and the oldest forts in India, The most valuable monuments in the Kangra Fort is Vajreshwari temple. The most beautiful way to look Kangra Fort by the road during journey. The famous monumental attractions of Himachal Pradesh is very near to famous Dharamsala. </p>
+
+
+                          <h4>8. 
+                       Chittaurgarh Fort: Chittaurgarh</h4> 
+                         <img src = "C:\Users\AMAN\Desktop\hackerthon\forts\h.jpg" alt = "example image" height ="500"  width = "1500" >  
+                         <p>Chittaurgarh Fort is the largest fort of India and the grandest in the state of Rajasthan. It is situated on the left bank of the Berach river. It is also called as Water Fort, The fort had 84 water bodies inside, out of which only about 22 exist today. This living testimony represent the bravery of Maharana Pratap Singh and the great Rajput rulers of Rajasthan. One of the most significant forts in Rajasthan,host the biggest Rajput festival called the “Jauhar Mela”. The most valuable monuments in the Chittaurgarh Fort are Gaumukh reservoir, Vijay Stambha and Rana Kumbha palace. Rajasthan has famous numerous forts and palaces such as Amber Fort,Jaigarh Fort and Taragarh Fort. </p>
+
+
+                          <h4>9. 
+                        Panhala Fort: Kolhapur</h4> 
+                         <img src = "C:\Users\AMAN\Desktop\hackerthon\forts\i.jpg" alt = "example image" height ="500"  width = "1500" >  
+                         <p>Panhala fort,The largest and most important fort in Maharashtra, located looking over a pass in the Sahyadri mountain range near Kolhapur. Panhala fort structures is the representative of the great Maratha Empire. Most of the forts in Maharashtra are associated with Shivaji, the great Maratha warrior. There are a number of forts in Maharashtra famous for trekking such as Purandhar Fort,Bahadurgad Fort, Ahmednagar Fort, Ratnagarh Fort. Murud a city famous for the impregnable fort of Janjira and beautiful beach,Janjira is Sea fort situated at the coastal village of Murud, in the Raigad district of Maharashtra. </p>
+
+
+                          <h4>10. 
+                        Srirangapatnam Fort: Srirangapatnam</h4> 
+                         <img src = "C:\Users\AMAN\Desktop\hackerthon\forts\j.jpg" alt = "example image" height ="500"  width = "1500" >  
+                         <p>Srirangapatnam Fort the famous fort in Karnataka,Situated near to the holy river Kaveri. srirangapatnam Fort or Tipu Sultan’s palace is one of the prominent monuments in Karnataka. Other attractions include a Mosque “Jumma Masjid”, the Daria Daulat Gardens,the Rangantittu Bird Sanctuary and The Mausoleum Of Tipu Sulthan. Karnataka forts and palaces form an indelible part of Karnataka tourism.Karnataka tour without its Forts in is incomplete, these are among the best attractions of Karnataka. Another famous fort is Belgaum Fort,one of the oldest monuments of Karnataka. </p>
+                        
+
+                        
+                        
+
+                         </div>
+                         </div>                                                                                                                                                                                                                                                                                                                                 
+
+            
+
+
+
+
+   </body>
+
+
+
+</html>
